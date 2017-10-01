@@ -2,7 +2,8 @@ from rest_framework import serializers
 
 from models import Shipment, Shipping
 
-class ShippingSerializer(serializers.modelserilizer):
+class ShippingSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = Shipping
         fields = ('id', 'shipping_first_name', 'shipping_last_name',
@@ -11,7 +12,8 @@ class ShippingSerializer(serializers.modelserilizer):
             'shipping_phone_number')
 
 class ShipmentSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = Shipment
         fields = ('id', 'retailer', 'product_id','shipping',
-            'quatity')
+            'quantity')

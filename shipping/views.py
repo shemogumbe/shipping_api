@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 
 from models import Shipping, Shipment
+from serializers import ShipmentSerializer, ShippingSerializer
 
 @api_view(['POST'])
 @renderer_classes((JSONRenderer, ))
@@ -14,11 +15,15 @@ def add_shipment(request):
     'quantity': data['quantity']
     }
     shipping = data['shipping']
+    shipment_serializer = ShipmentSerializer(data=shipment)
+    if shipment_serializer.is_valid():
+        shipment_serializer.save()
 
-    shipment_record = Shipment(**shipment)
-    shipment_record.save()
-    shipping_record = Shipping(**shipping)
-    shipping_record.save()
+    shipping_serializer = ShippingSerializer(data=shipping)
+    if shipping_serializer.is_valid():
+        shipping_serializer.save()
+    else:
+        print shipping_serializer.errors
 
     message = {'success': "Shipping added successfully"}
     return Response(message)
