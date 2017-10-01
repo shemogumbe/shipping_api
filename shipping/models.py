@@ -20,7 +20,7 @@ class Shipment(models.Model):
     retailer = models.CharField(max_length=100)
     product_id = models.CharField(max_length=50)
     shipping = models.ForeignKey(Shipping, on_delete=models.CASCADE)
-    quatity = models.CharField(max_length=50)
+    quantity = models.CharField(max_length=50)
 
 
 

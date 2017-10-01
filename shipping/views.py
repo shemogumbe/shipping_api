@@ -1,6 +1,24 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 
-from django.shortcuts import render
+from models import Shipping, Shipment
 
-# Create your views here.
+@api_view(['POST'])
+@renderer_classes((JSONRenderer, ))
+def add_shipment(request):
+    data = request.data
+    shipment = {
+    'retailer': data['retailer'],
+    'product_id': data['product_id'],
+    'quantity': data['quantity']
+    }
+    shipping = data['shipping']
+
+    shipment_record = Shipment(**shipment)
+    shipment_record.save()
+    shipping_record = Shipping(**shipping)
+    shipping_record.save()
+
+    message = {'success': "Shipping added successfully"}
+    return Response(message)
