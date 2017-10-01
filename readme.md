@@ -1,4 +1,4 @@
-#Shipping Application bug fix#
+# Shipping Application bug fix
 This code was done to help Mihai debug is shipment application in my absense, the purpose is to be able to create an API to receive json post data in the form:
 
 {
@@ -20,7 +20,7 @@ This code was done to help Mihai debug is shipment application in my absense, th
 }
 
 
-##SET UP#
+## SET UP
 In order to set up the application,
 
 1. Create a virtual environment and clone this code into the virtual environment:
