@@ -17,6 +17,7 @@ class Shipping(models.Model):
     shipping_state = models.CharField(max_length=50)
     shipping_country = models.CharField(max_length=50)
     shipping_phone_number = models.CharField(max_length=20)
+    shipping_zip_code = models.CharField(max_length=100)
 
 class Shipment(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)

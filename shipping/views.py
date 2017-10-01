@@ -15,9 +15,19 @@ def add_shipment(request):
     'quantity': data['quantity']
     }
     shipping = data['shipping']
+    shipping_object = Shipping(**shipping)
+    try:
+        shipping_object.save()
+        shipping_id = shipping_object.id
+    except Exception as e:
+        print e
+    
+    shipment.update({'shipping': shipping_id})
     shipment_serializer = ShipmentSerializer(data=shipment)
     if shipment_serializer.is_valid():
         shipment_serializer.save()
+    else:
+        print shipment_serializer.errors
 
     shipping_serializer = ShippingSerializer(data=shipping)
     if shipping_serializer.is_valid():
